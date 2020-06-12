@@ -9,7 +9,7 @@ import Router from './src/router';
 import settingsReducer from './src/store/reducers/settings';
 
 const rootReducer = combineReducers({
-  settings: settingsReducer
+    settings: settingsReducer
 });
 
 export const store = createStore(rootReducer, (
@@ -17,33 +17,33 @@ export const store = createStore(rootReducer, (
 ));
 
 class App extends Component {
-  state = {ready: false};
+    state = {ready: false};
 
-  async componentDidMount() {
-    await loadAsync({
-      'Lato-Light': require('./src/assets/fonts/Lato-Light.ttf'),
-      'Lato-Regular': require('./src/assets/fonts/Lato-Regular.ttf'),
-      'Lato-Bold': require('./src/assets/fonts/Lato-Bold.ttf')
-    });
+    async componentDidMount() {
+        await loadAsync({
+            'Lato-Light': require('./src/assets/fonts/Lato-Light.ttf'),
+            'Lato-Regular': require('./src/assets/fonts/Lato-Regular.ttf'),
+            'Lato-Bold': require('./src/assets/fonts/Lato-Bold.ttf')
+        });
 
-    initApp(() => {
-      this.setState({ready: true})
-    })
-  }
+        initApp(() => {
+            this.setState({ready: true})
+        })
+    }
 
-  render() {
-    const {ready} = this.state;
-    // Hide yellow boxes
-    console.disableYellowBox = true;
+    render() {
+        const {ready} = this.state;
+        // Hide yellow boxes
+        console.disableYellowBox = true;
 
-    return (
-        ready ?
-            <Provider store={store}>
-              <Router/>
-            </Provider> :
-            <Spinner size={64} />
-    );
-  }
+        return (
+            ready ?
+                <Provider store={store}>
+                    <Router/>
+                </Provider> :
+                <Spinner color='#000' size={64}/>
+        );
+    }
 }
 
 export default App;

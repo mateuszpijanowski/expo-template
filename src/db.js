@@ -37,17 +37,17 @@ export const initApp = (callback) => {
     db.transaction(
         tx => {
             // CHECK CORRECTION APP VERSION AND UPDATE DB
-            tx.executeSql("select * from template", [], (_, {rows}) => {
+            tx.executeSql("select * from settings", [], (_, {rows}) => {
                 const version = rows._array[0].version;
 
                 if (version !== VERSION) {
                     if (version.includes('_INIT')) {
-                        tx.executeSql('UPDATE template SET lang = ?, version = ? WHERE id = 0;', [getLocale(), VERSION], () => {
+                        tx.executeSql('UPDATE settings SET lang = ?, version = ? WHERE id = 0;', [getLocale(), VERSION], () => {
                             callback();
                         });
                     } else {
                         //const versionID = +version.split('.').join("");
-                        tx.executeSql('UPDATE template SET version = ? WHERE id = 0;', [VERSION], () => {
+                        tx.executeSql('UPDATE settings SET version = ? WHERE id = 0;', [VERSION], () => {
                             callback();
                         });
                     }

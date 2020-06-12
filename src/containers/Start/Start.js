@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import Spinner from '../../components/Spinner/Spinner';
 import Template from "../Template/Template";
 
@@ -13,7 +13,7 @@ class Start extends Component {
 
     componentDidMount() {
         this.props.onInitSettings(() => {
-            this.setState({loading: true});
+            this.setState({loading: false});
         });
     }
 
@@ -22,11 +22,13 @@ class Start extends Component {
 
         return (
             <>
-                {loading ?
-                    <Spinner size={64} /> :
+                {!loading ?
                     <Template>
-                        <Text>Expo template</Text>
-                    </Template>
+                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                            <Text style={{color: '#000', fontFamily: 'Lato-Light', fontSize: 48}}>Expo template</Text>
+                        </View>
+                    </Template> :
+                    <Spinner size={64}/>
                 }
             </>
         )
